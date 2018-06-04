@@ -1,2 +1,6 @@
 /* styles.css */
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.content {
+  padding: 25px;
+}

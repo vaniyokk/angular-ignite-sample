@@ -1,6 +1,5 @@
-<h2>My Heroes</h2>
-
 <button igxButton igxRipple (click)="create()">Create</button>
+<p></p>
 
 <igx-grid #grid [data]="heroes" width="1200px" height="600px" [rowSelectable]="true" [paging]="true" *ngIf="heroes">
   <igx-column field="id" header="Id"  width="150px" [sortable]="true" [filterable]="true" [resizable]="true" [hasSummary]="true">
@@ -11,10 +10,12 @@
   </igx-column>
   <igx-column field="age" header="age"  width="150px" [sortable]="true" [filterable]="true" [resizable]="true">
   </igx-column>
-  <igx-column field="id" header="Actions" width="140px">
-    <ng-template igxCell let-value>
-      <button igxButton igxRipple (click)="edit(value)">Edit</button>
-      <button igxButton igxRipple (click)="delete(value)">Delete</button>
+  <igx-column field="id" header="Actions">
+    <ng-template igxCell let-value igxLayout>
+      <div igxFlex>
+        <button igxButton igxRipple (click)="edit(value)">Edit</button>
+        <button igxButton igxRipple (click)="delete(value)">Delete</button>
+      </div>
     </ng-template>
   </igx-column>
 </igx-grid>

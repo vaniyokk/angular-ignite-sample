@@ -5,6 +5,7 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { IgxDialogComponent } from 'igniteui-angular/main';
 import { FormProviderService } from '../forms/form-provider.service';
+import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
 
 @Component({
   selector: 'app-heroes',
@@ -23,6 +24,7 @@ export class HeroesComponent implements OnInit {
 
   public formFields: any[];
   public currentEditing: Hero = null;
+  public selectedRow: any;
 
   constructor(private heroService: HeroService, private formProviderService: FormProviderService) { }
 
@@ -40,13 +42,14 @@ export class HeroesComponent implements OnInit {
     });
   }
 
-  delete(hero: number): void {
-    this.heroes = this.heroes.filter(h => h.id !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+  delete(): void {
+    this.heroes = this.heroes.filter(h => h.id !== this.selectedRow.id);
+    this.heroService.deleteHero(this.selectedRow.id).subscribe();
+    this.selectedRow = null;
   }
 
-  edit(id: number): void {
-    this.heroService.getHero(id)
+  edit(): void {
+    this.heroService.getHero(this.selectedRow.id)
       .subscribe(hero => {
         this.currentEditing = hero;
         this.formFields = this.formProviderService.getHeroFields(hero)
@@ -57,6 +60,14 @@ export class HeroesComponent implements OnInit {
   create() {
     this.formFields = this.formProviderService.getHeroFields()
     this.editOrCreateDialog.open()
+  }
+
+  handleRowSelection(args) {
+    const targetCell = args.cell as IgxGridCellComponent;
+    const targetRowID = targetCell.row.rowID;
+    console.log(this.grid.selectedRows());
+    this.grid.selectRows([targetRowID], true);
+    this.selectedRow = targetRowID;
   }
 
   onHeroUpdate(hero) {

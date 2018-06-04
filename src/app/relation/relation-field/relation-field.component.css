@@ -2,6 +2,10 @@
   min-width: 800px;
 }
 
+.relation-field {
+  max-width: 320px;
+}
+
 .close {
   color: red;
   font-weight: bold;

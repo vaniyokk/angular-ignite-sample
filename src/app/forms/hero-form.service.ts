@@ -3,12 +3,12 @@ import { Injectable }       from '@angular/core';
 import { FieldDropdown } from './fields/field-dropdown';
 import { FieldBase }     from './fields/field-base';
 import { FieldTextbox }  from './fields/field-textbox';
-import { Hero } from '../hero';
+import { Hero } from '../models/hero';
 
 @Injectable()
-export class FormProviderService {
+export class HeroFormService {
 
-  getHeroFields(hero?: Hero): FieldBase<any>[] {
+  getFields(hero?: Hero): FieldBase<any>[] {
 
     let fields: FieldBase<any>[] = [
 

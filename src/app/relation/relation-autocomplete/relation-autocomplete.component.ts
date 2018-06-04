@@ -6,9 +6,10 @@ import {
    debounceTime, distinctUntilChanged, switchMap
  } from 'rxjs/operators';
 
-import { Hero } from '../../hero';
-import { HeroService } from '../../hero.service';
+import { Hero } from '../../models/hero';
+import { DictionaryService } from '../../dictionary.service';
 import { Relation } from '../relation';
+import { BaseDictionaryModel } from '../../models/base';
 
 @Component({
   selector: 'relation-autocomplete',
@@ -18,11 +19,11 @@ import { Relation } from '../relation';
 export class RelationAutocompleteComponent implements OnInit {
 
   private searchTerms = new Subject<string>();
-  public heroes$: Observable<Hero[]>;
+  public items$: Observable<BaseDictionaryModel[]>;
   public searchBoxText: string;
   @Output() selectRelation = new EventEmitter<Relation>();
 
-  constructor(private heroService: HeroService) {}
+  constructor(private dataService: DictionaryService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -30,21 +31,21 @@ export class RelationAutocompleteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.heroes$ = this.searchTerms.pipe(
+    this.items$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
       // ignore new term if same as previous term
       distinctUntilChanged(),
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.dataService.search(term)),
     );
   }
 
-  onSelect(hero: Hero) {
+  onSelect(item: BaseDictionaryModel) {
     this.searchBoxText = '';
     this.selectRelation.emit({
-      realValue: hero.id,
-      displayValue: hero.name
+      realValue: item.id,
+      displayValue: item.name
     });
   }
 }

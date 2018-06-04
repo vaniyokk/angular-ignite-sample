@@ -10,11 +10,11 @@
   <div class="table-dialog__content">
     <igx-grid
       #grid
-      [data]="heroes"
+      [data]="items"
       width="800px"
       height="600px"
       [autoGenerate]="true"
-      *ngIf="heroes.length > 0"
+      *ngIf="items.length > 0"
       (onSelection)="handleRowSelection($event)"
       [paging]="true">
     </igx-grid>

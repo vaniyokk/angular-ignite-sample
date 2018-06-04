@@ -1,18 +1,18 @@
 import { DictionaryComponent } from './../dictionary/dictionary.component';
 import { Component } from '@angular/core';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
-import { FormProviderService } from '../forms/form-provider.service';
+import { Hero } from '../models/hero';
+import { DictionaryService } from '../dictionary.service';
+import { HeroFormService } from '../forms/hero-form.service';
 
 @Component({
   selector: 'app-heroes',
-  templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css'],
-  providers:  [FormProviderService]
+  templateUrl: '../dictionary/dictionary.component.html',
+  styleUrls: ['../dictionary/dictionary.component.css'],
+  providers:  [HeroFormService]
 })
 export class HeroesComponent extends DictionaryComponent<Hero> {
-  constructor(public heroService: HeroService, public formProviderService: FormProviderService) {
+  constructor(heroService: DictionaryService, formProviderService: HeroFormService) {
     super(Hero, heroService, formProviderService)
   }
 }

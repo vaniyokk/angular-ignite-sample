@@ -1,11 +1,11 @@
-import { FormProviderService } from './../forms/form-provider.service';
+import { DictionaryConfigItem } from './../models/base';
+import { HeroFormService } from './../forms/hero-form.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
 import { IgxDialogComponent } from 'igniteui-angular/main';
 import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
-import { BaseDictionaryModel } from '../hero';
+import { BaseDictionaryModel } from '../models/base';
 
-@Component({})
 export class DictionaryComponent<T extends BaseDictionaryModel> implements OnInit {
 
   @ViewChild("form")
@@ -15,63 +15,64 @@ export class DictionaryComponent<T extends BaseDictionaryModel> implements OnIni
   private grid: IgxGridComponent;
 
   private dataModel: T;
+  protected dataService: any;
+  protected formProviderService: any;
 
   public items: T[];
   public formFields: any[];
   public currentEditing: T = null;
-  public dataService: any;
-  public formProviderService: any;
   public selectedRow: any;
+  public dictionaryConfig: DictionaryConfigItem[];
 
   constructor(model: { new (): T; }, dataService: any, formProviderService: any) {
-      this.dataModel = new model();
-      this.dataService = dataService;
-      this.formProviderService = formProviderService;
+    this.dataModel = new model();
+    this.dataService = dataService;
+    this.formProviderService = formProviderService;
+    this.dictionaryConfig = this.dataModel.getDictionaryConfig();
   }
 
   ngOnInit() {
     this.items = [];
     this.getData();
-    this.formFields = this.formProviderService.getHeroFields()
+    this.formFields = this.formProviderService.getFields()
   }
 
   getData(): void {
     this.dataService.getData()
     .subscribe(items => {
       this.items = items
-      console.log(items)
       this.grid.clearSummaryCache();
     });
   }
 
-  create() {
-    this.formFields = this.formProviderService.getHeroFields()
+  create(): void {
+    this.formFields = this.formProviderService.getFields()
     this.editOrCreateDialog.open()
   }
 
   edit(): void {
-    this.dataService.getHero(this.selectedRow.id)
+    this.dataService.getSingle(this.selectedRow.id)
       .subscribe(hero => {
         this.currentEditing = hero;
-        this.formFields = this.formProviderService.getHeroFields(hero)
+        this.formFields = this.formProviderService.getFields(hero)
         this.editOrCreateDialog.open()
       });
   }
 
-  handleRowSelection(args) {
+  delete(): void {
+    this.items = this.items.filter(h => h.id !== this.selectedRow.id);
+    this.dataService.delete(this.selectedRow.id).subscribe();
+    this.selectedRow = null;
+  }
+
+  onRowSelected(args): void {
     const targetCell = args.cell as IgxGridCellComponent;
     const targetRowID = targetCell.row.rowID;
     this.grid.selectRows([targetRowID], true);
     this.selectedRow = targetRowID;
   }
 
-  delete(): void {
-    this.items = this.items.filter(h => h.id !== this.selectedRow.id);
-    this.dataService.deleteHero(this.selectedRow.id).subscribe();
-    this.selectedRow = null;
-  }
-
-  onFormSubmit(item) {
+  onFormSubmit(item): void {
     if(this.currentEditing) {
       Object.assign(this.currentEditing, item);
       this.dataService.update(this.currentEditing as T)
@@ -87,6 +88,4 @@ export class DictionaryComponent<T extends BaseDictionaryModel> implements OnIni
         });
     }
   }
-
-
 }

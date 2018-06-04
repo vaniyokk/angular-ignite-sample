@@ -5,7 +5,7 @@ import { Relation } from '../relation';
 
 type RelationSearchMode = 'autocomplete' | 'table';
 @Component({
-  selector: 'relation-input',
+  selector: 'relation-field',
   templateUrl: './relation-field.component.html',
   styleUrls: [ './relation-field.component.css' ]
 })

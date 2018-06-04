@@ -35,7 +35,7 @@ import { DynamicFormFieldComponent } from './forms/dynamic-form-field/dynamic-fo
     ),
     IgxDialogModule,
     IgxInputGroupModule,
-    IgxGridModule,
+    IgxGridModule.forRoot(),
     IgxNavigationDrawerModule,
     IgxNavbarModule,
     IgxLayoutModule,

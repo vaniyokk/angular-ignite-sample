@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 
@@ -8,6 +8,9 @@ import {
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
+import { IgxDialogComponent } from 'igniteui-angular/main';
+import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
 
 type RelationSearchMode = 'autocomplete' | 'table';
 @Component({
@@ -18,11 +21,18 @@ type RelationSearchMode = 'autocomplete' | 'table';
 export class HeroSearchComponent implements OnInit {
 
   heroes$: Observable<Hero[]>;
+  heroes: Hero[];
   private searchTerms = new Subject<string>();
   public searchBoxText: string;
 
   @Input()
   public mode: RelationSearchMode = 'autocomplete';
+
+  @ViewChild("grid")
+  private grid2: IgxGridComponent;
+
+  @ViewChild("tableDialog")
+  private tableDialog: IgxDialogComponent;
 
   constructor(private heroService: HeroService) {}
 
@@ -32,10 +42,12 @@ export class HeroSearchComponent implements OnInit {
   }
 
   showSearchTable(): void {
-    alert(32);
+    this.getHeroes();
+    this.tableDialog.open()
   }
 
   ngOnInit(): void {
+    this.heroes = [];
     this.heroes$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
@@ -46,9 +58,23 @@ export class HeroSearchComponent implements OnInit {
     );
   }
 
+  getHeroes(): void {
+    this.heroService.getHeroes()
+    .subscribe(heroes => {
+      console.log(heroes)
+      this.heroes = heroes;
+    });
+  }
+
   onSelect(hero: Hero) {
     console.log(`Selected Hero id: ${hero.id}`);
     this.searchBoxText = '';
+  }
 
+  handleRowSelection(args) {
+    const targetCell = args.cell as IgxGridCellComponent;
+    const targetRowID = targetCell.row.rowID;
+    this.grid2.selectRows([targetRowID], true);
+    console.log(`Selected Hero id: ${targetRowID.id}`);
   }
 }

@@ -35,3 +35,7 @@ ul.search-result {
   margin-top: 0;
   padding-left: 0;
 }
+
+.table-dialog__content {
+  min-width: 800px;
+}

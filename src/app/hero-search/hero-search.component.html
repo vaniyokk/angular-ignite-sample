@@ -1,5 +1,4 @@
 <div id="search-component">
-  <!-- TODO: 2 modex: typeahead and popup with table -->
   <ng-container [ngSwitch]="mode">
     <ng-container *ngSwitchCase="'autocomplete'">
       <igx-input-group>
@@ -16,14 +15,26 @@
     </ng-container>
     <ng-container *ngSwitchCase="'table'">
       <igx-input-group>
-        <input igxInput #tableBox id="table-box" (click)="tableDialog.open()" />
+        <input igxInput #tableBox id="table-box" (click)="showSearchTable()" />
       </igx-input-group>
 
       <igx-dialog #tableDialog
-        title="Click any row to select entity"
+        class="table-dialog"
+        title="Click any row to select an entity"
         closeOnOutsideSelect="true"
       >
-        <p>test</p>
+        <div class="table-dialog__content">
+          <igx-grid
+            #grid
+            [data]="heroes"
+            width="800px"
+            height="600px"
+            [autoGenerate]="true"
+            *ngIf="heroes.length > 0"
+            (onSelection)="handleRowSelection($event)"
+            [paging]="true">
+          </igx-grid>
+        </div>
       </igx-dialog>
     </ng-container>
 

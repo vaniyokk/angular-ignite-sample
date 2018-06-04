@@ -5,7 +5,7 @@
 </ng-template>
 <p></p>
 
-<igx-grid #grid [data]="heroes" width="100%" height="600px" [paging]="true" (onSelection)="handleRowSelection($event)">
+<igx-grid #grid [data]="items" width="100%" height="600px" [paging]="true" (onSelection)="handleRowSelection($event)">
   <igx-column field="id" header="Id" [sortable]="true" [filterable]="true" [resizable]="true" [hasSummary]="true">
   </igx-column>
   <igx-column field="name" header="Name" [sortable]="true" [filterable]="true" [resizable]="true">
@@ -17,5 +17,5 @@
 </igx-grid>
 
 <igx-dialog #form title="Edit form" closeOnOutsideSelect="true">
-  <app-dynamic-form [fields]="formFields" (newHero)="onHeroUpdate($event)"></app-dynamic-form>
+  <app-dynamic-form [fields]="formFields" (formSubmit)="onFormSubmit($event)"></app-dynamic-form>
 </igx-dialog>

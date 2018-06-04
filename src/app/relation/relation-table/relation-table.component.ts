@@ -37,7 +37,7 @@ export class RelationTableComponent implements OnInit {
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
+    this.heroService.getData()
     .subscribe(heroes => {
       this.heroes = heroes;
     });

@@ -13,7 +13,7 @@ import { Hero } from '../../hero';
 })
 export class DynamicFormComponent implements OnChanges {
 
-  @Output() newHero = new EventEmitter<any>();
+  @Output() formSubmit = new EventEmitter<any>();
   @Input() fields: FieldBase<any>[] = [];
   form: FormGroup;
   payLoad = '';
@@ -25,6 +25,6 @@ export class DynamicFormComponent implements OnChanges {
   }
 
   onSubmit(event) {
-    this.newHero.emit(this.form.value);
+    this.formSubmit.emit(this.form.value);
   }
 }

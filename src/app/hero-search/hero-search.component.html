@@ -1,13 +1,20 @@
 <div id="search-component">
-  <h4>Hero Search</h4>
+  <!-- TODO: 2 modex: typeahead and popup with table -->
+  <ng-container [ngSwitch]="mode">
+    <ng-container *ngSwitchCase="'autocomplete'">
+      <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+      <ul class="search-result">
+        <li *ngFor="let hero of heroes$ | async" >
+          <!-- TODO: save and expose value on click -->
+          <a>
+            {{hero.name}}
+          </a>
+        </li>
+      </ul>
+    </ng-container>
+    <ng-container *ngSwitchCase="'table'">
+      <input #tableBox id="table-box" (click)="showSearchTable()" />
+    </ng-container>
 
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-
-  <ul class="search-result">
-    <li *ngFor="let hero of heroes$ | async" >
-      <a routerLink="/detail/{{hero.id}}">
-        {{hero.name}}
-      </a>
-    </li>
-  </ul>
+  </ng-container>
 </div>

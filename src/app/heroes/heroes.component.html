@@ -1,7 +1,7 @@
 <button igxButton igxRipple (click)="create()">Create</button>
 <p></p>
 
-<igx-grid #grid [data]="heroes" width="1200px" height="600px" [rowSelectable]="true" [paging]="true">
+<igx-grid #grid [data]="heroes" width="100%" height="600px" [rowSelectable]="true" [paging]="true">
   <igx-column field="id" header="Id"  width="150px" [sortable]="true" [filterable]="true" [resizable]="true" [hasSummary]="true">
   </igx-column>
   <igx-column field="name" header="Name"  width="150px" [sortable]="true" [filterable]="true" [resizable]="true">

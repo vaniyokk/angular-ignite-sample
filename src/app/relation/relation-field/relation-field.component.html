@@ -1,5 +1,9 @@
-<ng-container [ngSwitch]="mode">
-  <relation-autocomplete *ngSwitchCase="'autocomplete'"></relation-autocomplete>
-  <relation-table *ngSwitchCase="'table'"></relation-table>
+<ng-container [ngSwitch]="mode" *ngIf="!selected else selectedView">
+  <relation-autocomplete *ngSwitchCase="'autocomplete'" (selectRelation)="onSelectRelation($event)"></relation-autocomplete>
+  <relation-table *ngSwitchCase="'table'" (selectRelation)="onSelectRelation($event)"></relation-table>
 </ng-container>
+<ng-template #selectedView>
+  <span>You select: {{ selected.displayValue }}</span> &nbsp;<span class="close" (click)="reset()">x</span>
+</ng-template>
+{{ currentValue | json }}
 

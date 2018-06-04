@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-
 
 import { Hero } from '../../hero';
 import { HeroService } from '../../hero.service';
 import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
 import { IgxDialogComponent } from 'igniteui-angular/main';
 import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
+import { Relation } from '../relation';
 
 @Component({
   selector: 'relation-table',
@@ -23,6 +23,8 @@ export class RelationTableComponent implements OnInit {
   @ViewChild("tableDialog")
   private tableDialog: IgxDialogComponent;
 
+  @Output() selectRelation = new EventEmitter<Relation>();
+
   constructor(private heroService: HeroService) {}
 
   showSearchTable(): void {
@@ -37,7 +39,6 @@ export class RelationTableComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
     .subscribe(heroes => {
-      console.log(heroes)
       this.heroes = heroes;
     });
   }
@@ -46,6 +47,9 @@ export class RelationTableComponent implements OnInit {
     const targetCell = args.cell as IgxGridCellComponent;
     const targetRowID = targetCell.row.rowID;
     this.grid2.selectRows([targetRowID], true);
-    console.log(`Selected Hero id: ${targetRowID.id}`);
+    this.selectRelation.emit({
+      realValue: targetRowID.id,
+      displayValue: targetRowID.name
+    });
   }
 }

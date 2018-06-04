@@ -1,12 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-
-import {
-   debounceTime, distinctUntilChanged, switchMap
- } from 'rxjs/operators';
-
-import { Hero } from '../../hero';
+import { Relation } from '../relation';
 
 type RelationSearchMode = 'autocomplete' | 'table';
 @Component({
@@ -15,10 +10,18 @@ type RelationSearchMode = 'autocomplete' | 'table';
   styleUrls: [ './relation-field.component.css' ]
 })
 export class RelationFieldComponent {
-  heroes: Hero[];
 
   @Input()
   public mode: RelationSearchMode = 'autocomplete';
+  public selected: Relation = null;
 
   constructor() {}
+
+  public onSelectRelation(value: Relation): void {
+    this.selected = value;
+  }
+
+  public reset(): void {
+    this.selected = null;
+  }
 }

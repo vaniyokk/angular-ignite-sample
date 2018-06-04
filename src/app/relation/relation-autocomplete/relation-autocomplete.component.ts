@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
 
@@ -8,6 +8,7 @@ import {
 
 import { Hero } from '../../hero';
 import { HeroService } from '../../hero.service';
+import { Relation } from '../relation';
 
 @Component({
   selector: 'relation-autocomplete',
@@ -19,6 +20,7 @@ export class RelationAutocompleteComponent implements OnInit {
   private searchTerms = new Subject<string>();
   public heroes$: Observable<Hero[]>;
   public searchBoxText: string;
+  @Output() selectRelation = new EventEmitter<Relation>();
 
   constructor(private heroService: HeroService) {}
 
@@ -39,7 +41,10 @@ export class RelationAutocompleteComponent implements OnInit {
   }
 
   onSelect(hero: Hero) {
-    console.log(`Selected Hero id: ${hero.id}`);
     this.searchBoxText = '';
+    this.selectRelation.emit({
+      realValue: hero.id,
+      displayValue: hero.name
+    });
   }
 }

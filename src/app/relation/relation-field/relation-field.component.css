@@ -1,3 +1,9 @@
 .table-dialog__content {
   min-width: 800px;
 }
+
+.close {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+}

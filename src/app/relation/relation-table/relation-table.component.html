@@ -1,0 +1,22 @@
+<igx-input-group>
+  <input igxInput #tableBox id="table-box" (click)="showSearchTable()" />
+</igx-input-group>
+
+<igx-dialog #tableDialog
+  class="table-dialog"
+  title="Click any row to select an entity"
+  closeOnOutsideSelect="true"
+>
+  <div class="table-dialog__content">
+    <igx-grid
+      #grid
+      [data]="heroes"
+      width="800px"
+      height="600px"
+      [autoGenerate]="true"
+      *ngIf="heroes.length > 0"
+      (onSelection)="handleRowSelection($event)"
+      [paging]="true">
+    </igx-grid>
+  </div>
+</igx-dialog>

@@ -1,0 +1,11 @@
+<igx-input-group>
+  <input igxInput #searchBox id="search-box" (keyup)="search(searchBox.value)" [(ngModel)]="searchBoxText"/>
+</igx-input-group>
+<ul class="search-result" *ngIf="searchBoxText">
+  <li *ngFor="let hero of heroes$ | async" (click)="onSelect(hero)">
+    <!-- TODO: save and expose value on click -->
+    <a>
+      {{hero.name}}
+    </a>
+  </li>
+</ul>

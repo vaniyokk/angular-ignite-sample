@@ -12,11 +12,13 @@ import { AppRoutingModule }     from './app-routing.module';
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { HeroesComponent }      from './heroes/heroes.component';
-import { HeroSearchComponent }  from './hero-search/hero-search.component';
+import { RelationFieldComponent }  from './relation/relation-field/relation-field.component';
 import { MessagesComponent }    from './messages/messages.component';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { DynamicFormComponent }         from './forms/dynamic-form/dynamic-form.component';
 import { DynamicFormFieldComponent } from './forms/dynamic-form-field/dynamic-form-field.component';
+import { RelationAutocompleteComponent } from './relation/relation-autocomplete/relation-autocomplete.component';
+import { RelationTableComponent } from './relation/relation-table/relation-table.component';
 
 @NgModule({
   imports: [
@@ -49,9 +51,11 @@ import { DynamicFormFieldComponent } from './forms/dynamic-form-field/dynamic-fo
     DashboardComponent,
     HeroesComponent,
     MessagesComponent,
-    HeroSearchComponent,
+    RelationFieldComponent,
     DynamicFormComponent,
-    DynamicFormFieldComponent
+    DynamicFormFieldComponent,
+    RelationAutocompleteComponent,
+    RelationTableComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="mode">
+  <relation-autocomplete *ngSwitchCase="'autocomplete'"></relation-autocomplete>
+  <relation-table *ngSwitchCase="'table'"></relation-table>
+</ng-container>
+

@@ -4,14 +4,13 @@ import { NgModule }       from '@angular/core';
 import { BrowserModule }  from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule }    from '@angular/common/http';
-import { IgxGridModule, IgxDialogModule, IgxButtonModule, IgxCheckboxModule, IgxRippleModule, IgxLayoutModule, IgxNavbarModule, IgxNavigationDrawerModule } from 'igniteui-angular/main';
+import { IgxGridModule, IgxDialogModule, IgxButtonModule, IgxCheckboxModule, IgxRippleModule, IgxLayoutModule, IgxNavbarModule, IgxNavigationDrawerModule, IgxInputGroupModule } from 'igniteui-angular/main';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
-import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { HeroSearchComponent }  from './hero-search/hero-search.component';
 import { MessagesComponent }    from './messages/messages.component';
@@ -35,6 +34,7 @@ import { DynamicFormFieldComponent } from './forms/dynamic-form-field/dynamic-fo
       InMemoryDataService, { dataEncapsulation: false }
     ),
     IgxDialogModule,
+    IgxInputGroupModule,
     IgxGridModule,
     IgxNavigationDrawerModule,
     IgxNavbarModule,
@@ -48,7 +48,6 @@ import { DynamicFormFieldComponent } from './forms/dynamic-form-field/dynamic-fo
     AppComponent,
     DashboardComponent,
     HeroesComponent,
-    HeroDetailComponent,
     MessagesComponent,
     HeroSearchComponent,
     DynamicFormComponent,

@@ -19,6 +19,7 @@ export class HeroSearchComponent implements OnInit {
 
   heroes$: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
+  public searchBoxText: string;
 
   @Input()
   public mode: RelationSearchMode = 'autocomplete';
@@ -43,5 +44,11 @@ export class HeroSearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.heroService.searchHeroes(term)),
     );
+  }
+
+  onSelect(hero: Hero) {
+    console.log(`Selected Hero id: ${hero.id}`);
+    this.searchBoxText = '';
+
   }
 }

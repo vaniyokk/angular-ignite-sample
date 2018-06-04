@@ -3,12 +3,15 @@
   border-bottom: 1px solid gray;
   border-left: 1px solid gray;
   border-right: 1px solid gray;
-  width:195px;
-  height: 16px;
+  width:100%;
   padding: 5px;
+  height: 2em;
   background-color: white;
   cursor: pointer;
   list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-result li:hover {
@@ -27,11 +30,6 @@
 .search-result li a:active {
   color: white;
 }
-#search-box {
-  width: 200px;
-  height: 20px;
-}
-
 
 ul.search-result {
   margin-top: 0;

@@ -2,9 +2,11 @@
   <!-- TODO: 2 modex: typeahead and popup with table -->
   <ng-container [ngSwitch]="mode">
     <ng-container *ngSwitchCase="'autocomplete'">
-      <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
-      <ul class="search-result">
-        <li *ngFor="let hero of heroes$ | async" >
+      <igx-input-group>
+        <input igxInput #searchBox id="search-box" (keyup)="search(searchBox.value)" [(ngModel)]="searchBoxText"/>
+      </igx-input-group>
+      <ul class="search-result" *ngIf="searchBoxText">
+        <li *ngFor="let hero of heroes$ | async" (click)="onSelect(hero)">
           <!-- TODO: save and expose value on click -->
           <a>
             {{hero.name}}
@@ -13,7 +15,16 @@
       </ul>
     </ng-container>
     <ng-container *ngSwitchCase="'table'">
-      <input #tableBox id="table-box" (click)="showSearchTable()" />
+      <igx-input-group>
+        <input igxInput #tableBox id="table-box" (click)="tableDialog.open()" />
+      </igx-input-group>
+
+      <igx-dialog #tableDialog
+        title="Click any row to select entity"
+        closeOnOutsideSelect="true"
+      >
+        <p>test</p>
+      </igx-dialog>
     </ng-container>
 
   </ng-container>

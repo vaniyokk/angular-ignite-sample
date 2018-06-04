@@ -27,6 +27,7 @@ export class HeroesComponent implements OnInit {
   constructor(private heroService: HeroService, private formProviderService: FormProviderService) { }
 
   ngOnInit() {
+    this.heroes = [];
     this.getHeroes();
     this.formFields = this.formProviderService.getHeroFields()
   }
@@ -51,6 +52,7 @@ export class HeroesComponent implements OnInit {
   }
 
   create() {
+    this.formFields = this.formProviderService.getHeroFields()
     this.editOrCreateDialog.open()
   }
 
@@ -60,7 +62,6 @@ export class HeroesComponent implements OnInit {
       this.heroService.updateHero(this.currentEditing as Hero)
         .subscribe(() => {
           this.getHeroes();
-          this.currentEditing = null;
           this.editOrCreateDialog.close();
         })
     } else {
@@ -70,6 +71,5 @@ export class HeroesComponent implements OnInit {
           this.editOrCreateDialog.close();
         });
     }
-
   }
 }

@@ -1,15 +1,16 @@
 <div [formGroup]="form">
-  <label [attr.for]="field.key">{{field.label}}</label>
-
   <div [ngSwitch]="field.controlType">
+    <igx-input-group>
 
-    <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.type">
+      <input *ngSwitchCase="'textbox'" igxInput [formControlName]="field.key" [id]="field.key" [type]="field.type">
 
-    <select [id]="field.key" *ngSwitchCase="'dropdown'" [formControlName]="field.key">
-      <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
-    </select>
+      <select *ngSwitchCase="'dropdown'" igxInput [id]="field.key" [formControlName]="field.key">
+        <option *ngFor="let opt of field.options" [value]="opt.key">{{opt.value}}</option>
+      </select>
 
+      <label igxLabel [attr.for]="field.key">{{field.label}}</label>
+
+    </igx-input-group>
   </div>
-
   <div class="errorMessage" *ngIf="!isValid">{{field.label}} is required</div>
 </div>

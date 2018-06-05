@@ -3,7 +3,7 @@ import { FormGroup }                 from '@angular/forms';
 
 import { FieldBase }              from '../fields/field-base';
 import { FieldControlService }    from '../field-control.service';
-import { Hero } from '../../hero';
+import { Hero } from '../../models/hero';
 
 @Component({
   selector: 'app-dynamic-form',

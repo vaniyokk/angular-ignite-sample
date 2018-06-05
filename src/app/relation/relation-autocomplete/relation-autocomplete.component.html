@@ -1,5 +1,5 @@
 <igx-input-group>
-  <input igxInput #searchBox id="search-box" (keyup)="search(searchBox.value)" [(ngModel)]="searchBoxText"/>
+  <input igxInput placeholder="Type something..." #searchBox id="search-box" (keyup)="search(searchBox.value)" [(ngModel)]="searchBoxText"/>
 </igx-input-group>
 <ul class="search-result" *ngIf="searchBoxText">
   <li *ngFor="let item of items$ | async" (click)="onSelect(item)">

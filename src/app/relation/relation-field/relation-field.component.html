@@ -4,7 +4,9 @@
     <relation-table *ngSwitchCase="'table'" (selectRelation)="onSelectRelation($event)"></relation-table>
   </ng-container>
   <ng-template #selectedView>
-    <span>You select: {{ selected.displayValue }}</span> &nbsp;<span class="close" (click)="reset()">x</span>
+    <div class="relation-field__selected">
+      <span>You selected: {{ selected.displayValue }}</span> &nbsp;<span class="close" (click)="reset()">x</span>
+    </div>
   </ng-template>
 </div>
 

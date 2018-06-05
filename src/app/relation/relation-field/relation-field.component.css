@@ -6,6 +6,18 @@
   max-width: 320px;
 }
 
+.relation-field__selected {
+  padding: 0 5px;
+  margin-top: 10px;
+  border-bottom: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+}
+.relation-field__selected:hover {
+  border-bottom: 2px solid #000;
+}
+
+
 .close {
   color: red;
   font-weight: bold;

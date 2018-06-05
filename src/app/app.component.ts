@@ -9,7 +9,7 @@ import { IgxNavigationDrawerComponent } from 'igniteui-angular/navigation-drawer
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.pug',
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {

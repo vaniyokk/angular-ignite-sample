@@ -1,8 +1,8 @@
 export interface DictionaryConfigItem {
-  key: string,
-  title: string,
-  filterable: boolean,
-  sortable: boolean
+  field: string,
+  headerName: string,
+  filter: boolean,
+  sort: boolean
 }
 
 export abstract class BaseDictionaryModel {

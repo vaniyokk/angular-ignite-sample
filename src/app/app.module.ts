@@ -1,3 +1,4 @@
+import { HeroesAgComponent } from './heroes-ag/heroes-ag.component';
 import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
 import { FormsModule, ReactiveFormsModule }          from '@angular/forms';
 import { NgModule }       from '@angular/core';
@@ -6,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule }    from '@angular/common/http';
 import { IgxGridModule, IgxDialogModule, IgxButtonModule, IgxCheckboxModule, IgxRippleModule, IgxLayoutModule, IgxNavbarModule, IgxNavigationDrawerModule, IgxInputGroupModule } from 'igniteui-angular/main';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AgGridModule } from 'ag-grid-angular'
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -28,6 +30,7 @@ import { RelationTableComponent } from './relation/relation-table/relation-table
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    AgGridModule.withComponents([]),
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.
@@ -50,6 +53,7 @@ import { RelationTableComponent } from './relation/relation-table/relation-table
     AppComponent,
     DashboardComponent,
     HeroesComponent,
+    HeroesAgComponent,
     MessagesComponent,
     RelationFieldComponent,
     DynamicFormComponent,

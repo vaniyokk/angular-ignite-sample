@@ -4,6 +4,9 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
+import {LicenseManager} from "ag-grid-enterprise/main";
+LicenseManager.setLicenseKey("Evaluation_License_Valid_Until_1_August_2018__MTUzMzA3ODAwMDAwMA==8c0b423295f5960e7d0f3cbb4292e068");
+
 if (environment.production) {
   enableProdMode();
 }

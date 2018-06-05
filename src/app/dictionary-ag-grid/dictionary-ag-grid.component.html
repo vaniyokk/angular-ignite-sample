@@ -5,16 +5,19 @@
 </ng-template>
 <p></p>
 
-<igx-grid #grid [data]="items" width="100%" height="600px" [paging]="true" (onSelection)="onRowSelected($event)">
-  <igx-column
-    *ngFor="let item of dictionaryConfig"
-    [field]="item.field"
-    [header]="item.headerName"
-    [sortable]="item.sort"
-    [filterable]="item.filter"
-  >
-  </igx-column>
-</igx-grid>
+<ag-grid-angular
+  class="ag-theme-balham"
+  style="width: 100%; height: 500px;"
+  enableSorting
+  enableFilter
+  enableColResize
+  [rowData]="items"
+  [columnDefs]="dictionaryConfig"
+  rowSelection="single"
+  (rowSelected)="onRowSelected($event)"
+  (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>
 
 <igx-dialog #form title="Edit form" closeOnOutsideSelect="true">
   <app-dynamic-form [fields]="formFields" (formSubmit)="onFormSubmit($event)"></app-dynamic-form>

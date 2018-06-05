@@ -16,22 +16,22 @@ export class Hero extends BaseDictionaryModel {
   public getDictionaryConfig(): DictionaryConfigItem[] {
     return [
       {
-        key: 'id',
-        title: 'ID',
-        filterable: true,
-        sortable: true
+        field: 'id',
+        headerName: 'ID',
+        filter: true,
+        sort: true
       },
       {
-        key: 'email',
-        title: 'email',
-        filterable: true,
-        sortable: false
+        field: 'email',
+        headerName: 'Email',
+        filter: true,
+        sort: false
       },
       {
-        key: 'age',
-        title: 'Age',
-        filterable: false,
-        sortable: true
+        field: 'age',
+        headerName: 'Age',
+        filter: false,
+        sort: true
       },
     ]
   }

@@ -5,14 +5,14 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { MessageService } from './message.service';
-import { BaseDictionaryModel as BaseModel } from './models/base';
+import { Hero } from './models/hero';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({ providedIn: 'root' })
-export class DictionaryService {
+export class HeroService {
 
   private apiUrl = 'api/heroes';  // URL to web api
 
@@ -21,8 +21,8 @@ export class DictionaryService {
     private messageService: MessageService) { }
 
   /** GET items from the server */
-  getData (): Observable<BaseModel[]> {
-    return this.http.get<BaseModel[]>(this.apiUrl)
+  getData (): Observable<Hero[]> {
+    return this.http.get<Hero[]>(this.apiUrl)
       .pipe(
         tap(items => this.log(`fetched items`)),
         catchError(this.handleError('getItemes', []))
@@ -30,63 +30,63 @@ export class DictionaryService {
   }
 
   /** GET item by id. Return `undefined` when id not found */
-  getSingleNo404<Data>(id: number): Observable<BaseModel> {
+  getSingleNo404<Data>(id: number): Observable<Hero> {
     const url = `${this.apiUrl}/?id=${id}`;
-    return this.http.get<BaseModel[]>(url)
+    return this.http.get<Hero[]>(url)
       .pipe(
         map(items => items[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? `fetched` : `did not find`;
           this.log(`${outcome} item id=${id}`);
         }),
-        catchError(this.handleError<BaseModel>(`getItem id=${id}`))
+        catchError(this.handleError<Hero>(`getItem id=${id}`))
       );
   }
 
   /** GET item by id. Will 404 if id not found */
-  getSingle(id: number): Observable<BaseModel> {
+  getSingle(id: number): Observable<Hero> {
     const url = `${this.apiUrl}/${id}`;
-    return this.http.get<BaseModel>(url).pipe(
+    return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched item id=${id}`)),
-      catchError(this.handleError<BaseModel>(`getItem id=${id}`))
+      catchError(this.handleError<Hero>(`getItem id=${id}`))
     );
   }
 
   /* GET items whose name contains search term */
-  search(term: string): Observable<BaseModel[]> {
+  search(term: string): Observable<Hero[]> {
     if (!term.trim()) {
       // if not search term, return empty item array.
       return of([]);
     }
-    return this.http.get<BaseModel[]>(`${this.apiUrl}/?name=${term}`).pipe(
+    return this.http.get<Hero[]>(`${this.apiUrl}/?name=${term}`).pipe(
       tap(_ => this.log(`found items matching "${term}"`)),
-      catchError(this.handleError<BaseModel[]>('searchItemes', []))
+      catchError(this.handleError<Hero[]>('searchItemes', []))
     );
   }
 
   //////// Save methods //////////
 
   /** POST: add a new item to the server */
-  add(item: BaseModel): Observable<BaseModel> {
-    return this.http.post<BaseModel>(this.apiUrl, item, httpOptions).pipe(
-      tap((item: BaseModel) => this.log(`added item w/ id=${item.id}`)),
-      catchError(this.handleError<BaseModel>('addItem'))
+  add(item: Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.apiUrl, item, httpOptions).pipe(
+      tap((item: Hero) => this.log(`added item w/ id=${item.id}`)),
+      catchError(this.handleError<Hero>('addItem'))
     );
   }
 
   /** DELETE: delete the item from the server */
-  delete(item: BaseModel | number): Observable<BaseModel> {
+  delete(item: Hero | number): Observable<Hero> {
     const id = typeof item === 'number' ? item : item.id;
     const url = `${this.apiUrl}/${id}`;
 
-    return this.http.delete<BaseModel>(url, httpOptions).pipe(
+    return this.http.delete<Hero>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted item id=${id}`)),
-      catchError(this.handleError<BaseModel>('deleteItem'))
+      catchError(this.handleError<Hero>('deleteItem'))
     );
   }
 
   /** PUT: update the item on the server */
-  update(item: BaseModel): Observable<any> {
+  update(item: Hero): Observable<any> {
     return this.http.put(this.apiUrl, item, httpOptions).pipe(
       tap(_ => this.log(`updated item id=${item.id}`)),
       catchError(this.handleError<any>('updateItem'))
@@ -115,6 +115,6 @@ export class DictionaryService {
 
   /** Log a ItemService message with the MessageService */
   private log(message: string) {
-    this.messageService.add('DictionaryService: ' + message);
+    this.messageService.add('HeroService: ' + message);
   }
 }

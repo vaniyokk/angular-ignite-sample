@@ -7,7 +7,7 @@ import {
  } from 'rxjs/operators';
 
 import { Hero } from '../../models/hero';
-import { DictionaryService } from '../../dictionary.service';
+import { HeroService } from '../../hero.service';
 import { Relation } from '../relation';
 import { BaseDictionaryModel } from '../../models/base';
 
@@ -23,7 +23,7 @@ export class RelationAutocompleteComponent implements OnInit {
   public searchBoxText: string;
   @Output() selectRelation = new EventEmitter<Relation>();
 
-  constructor(private dataService: DictionaryService) {}
+  constructor(private dataService: HeroService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {

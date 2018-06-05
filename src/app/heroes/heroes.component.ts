@@ -2,7 +2,7 @@ import { DictionaryComponent } from './../dictionary/dictionary.component';
 import { Component } from '@angular/core';
 
 import { Hero } from '../models/hero';
-import { DictionaryService } from '../dictionary.service';
+import { HeroService } from '../hero.service';
 import { HeroFormService } from '../forms/hero-form.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { HeroFormService } from '../forms/hero-form.service';
   providers:  [HeroFormService]
 })
 export class HeroesComponent extends DictionaryComponent<Hero> {
-  constructor(heroService: DictionaryService, formProviderService: HeroFormService) {
+  constructor(heroService: HeroService, formProviderService: HeroFormService) {
     super(Hero, heroService, formProviderService)
   }
 }

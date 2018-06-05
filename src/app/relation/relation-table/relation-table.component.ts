@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angu
 import { Observable, Subject } from 'rxjs';
 
 import { Hero } from '../../models/hero';
-import { DictionaryService } from '../../dictionary.service';
+import { HeroService } from '../../hero.service';
 import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
 import { IgxDialogComponent } from 'igniteui-angular/main';
 import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
@@ -27,7 +27,7 @@ export class RelationTableComponent implements OnInit {
 
   @Output() selectRelation = new EventEmitter<Relation>();
 
-  constructor(private dataService: DictionaryService) {}
+  constructor(private dataService: HeroService) {}
 
   showSearchTable(): void {
     this.getItems();

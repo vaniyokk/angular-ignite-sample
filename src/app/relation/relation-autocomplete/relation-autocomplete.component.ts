@@ -7,23 +7,27 @@ import {
  } from 'rxjs/operators';
 
 import { Hero } from '../../models/hero';
-import { HeroService } from '../../hero.service';
+import { RelationService } from '../relation.service';
 import { Relation } from '../relation';
-import { BaseDictionaryModel } from '../../models/base';
+import { BaseDictionaryModel, BaseDataModel } from '../../models/base';
 
 @Component({
   selector: 'relation-autocomplete',
   templateUrl: './relation-autocomplete.component.html',
+  providers: [ RelationService ],
   styleUrls: [ './relation-autocomplete.component.css' ]
 })
 export class RelationAutocompleteComponent implements OnInit {
 
+  @Input() dataModel: BaseDataModel = null;
+  @Output() selectRelation = new EventEmitter<Relation>();
+
   private searchTerms = new Subject<string>();
   public items$: Observable<BaseDictionaryModel[]>;
   public searchBoxText: string;
-  @Output() selectRelation = new EventEmitter<Relation>();
 
-  constructor(private dataService: HeroService) {}
+
+  constructor(private dataService: RelationService) {}
 
   // Push a search term into the observable stream.
   search(term: string): void {
@@ -37,7 +41,7 @@ export class RelationAutocompleteComponent implements OnInit {
       // ignore new term if same as previous term
       distinctUntilChanged(),
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.dataService.search(term)),
+      switchMap((term: string) => this.dataService.search(this.dataModel, term)),
     );
   }
 

@@ -18,7 +18,11 @@ export abstract class BaseDictionaryModel {
   abstract getDisplayKey(): string;
 
   getValueKey() {
-    return 'id'
+    return 'id';
   }
+}
 
+export interface BaseDataModel {
+  apiUrl: string;
+  modelName: string;
 }

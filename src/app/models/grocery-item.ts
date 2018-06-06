@@ -4,19 +4,17 @@ import {
   DictionaryConfigItem
 } from './base';
 
-export class Hero extends BaseDictionaryModel implements BaseDataModel {
-  public apiUrl = 'api/heroes';  // URL to web api
-  public modelName = 'Hero';
+export class GroceryItem extends BaseDictionaryModel implements BaseDataModel {
+  public apiUrl = 'api/groceries';  // URL to web api
+  public modelName = 'GroceryItem';
 
   name: string;
-  email: string;
-  age: number;
+  type: string;
 
   constructor() {
     super();
     this.name = '';
-    this.email = '';
-    this.age = 11;
+    this.type = '';
   }
 
   public getDictionaryConfig(): DictionaryConfigItem[] {
@@ -28,18 +26,18 @@ export class Hero extends BaseDictionaryModel implements BaseDataModel {
         sort: true
       },
       {
-        field: 'email',
-        headerName: 'Email',
+        field: 'name',
+        headerName: 'Name',
         filter: true,
-        sort: false
-      },
-      {
-        field: 'age',
-        headerName: 'Age',
-        filter: false,
         sort: true
       },
-    ]
+      {
+        field: 'type',
+        headerName: 'Type',
+        filter: true,
+        sort: true
+      },
+    ];
   }
 
   getDisplayKey(): string {

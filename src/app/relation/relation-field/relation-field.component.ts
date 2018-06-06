@@ -3,6 +3,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Relation } from '../relation';
 
+import { BaseDataModel } from '../../models/base';
+
 type RelationSearchMode = 'autocomplete' | 'table';
 @Component({
   selector: 'relation-field',
@@ -11,8 +13,8 @@ type RelationSearchMode = 'autocomplete' | 'table';
 })
 export class RelationFieldComponent {
 
-  @Input()
-  public mode: RelationSearchMode = 'autocomplete';
+  @Input() public mode: RelationSearchMode = 'autocomplete';
+  @Input() public dataModel: BaseDataModel;
   public selected: Relation = null;
 
   constructor() {}

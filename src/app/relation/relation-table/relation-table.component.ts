@@ -3,35 +3,38 @@ import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angu
 import { Observable, Subject } from 'rxjs';
 
 import { Hero } from '../../models/hero';
-import { HeroService } from '../../hero.service';
+import { RelationService } from '../relation.service';
 import { IgxGridComponent } from 'igniteui-angular/grid/grid.component';
 import { IgxDialogComponent } from 'igniteui-angular/main';
 import { IgxGridCellComponent } from 'igniteui-angular/grid/cell.component';
 import { Relation } from '../relation';
-import { BaseDictionaryModel } from '../../models/base';
+import { BaseDictionaryModel, BaseDataModel } from '../../models/base';
 
 @Component({
   selector: 'relation-table',
   templateUrl: './relation-table.component.html',
+  providers: [ RelationService ],
   styleUrls: [ './relation-table.component.css' ]
 })
 export class RelationTableComponent implements OnInit {
 
-  items: BaseDictionaryModel[];
-
-  @ViewChild("grid")
-  private grid2: IgxGridComponent;
-
-  @ViewChild("tableDialog")
-  private tableDialog: IgxDialogComponent;
-
+  @Input() dataModel: BaseDataModel = null;
   @Output() selectRelation = new EventEmitter<Relation>();
 
-  constructor(private dataService: HeroService) {}
+  items: BaseDictionaryModel[];
+
+  @ViewChild('grid')
+  private grid2: IgxGridComponent;
+
+  @ViewChild('tableDialog')
+  private tableDialog: IgxDialogComponent;
+
+
+  constructor(private dataService: RelationService) {}
 
   showSearchTable(): void {
     this.getItems();
-    this.tableDialog.open()
+    this.tableDialog.open();
   }
 
   ngOnInit(): void {
@@ -39,7 +42,7 @@ export class RelationTableComponent implements OnInit {
   }
 
   getItems(): void {
-    this.dataService.getData()
+    this.dataService.getData(this.dataModel)
     .subscribe(items => {
       this.items = items;
     });

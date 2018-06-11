@@ -24,19 +24,19 @@ export class Hero extends BaseDictionaryModel implements BaseDataModel {
       {
         field: 'id',
         headerName: 'ID',
-        filter: true,
+        filter: 'agNumberColumnFilter',
         sort: true
       },
       {
         field: 'email',
         headerName: 'Email',
-        filter: true,
+        filter: 'agTextColumnFilter',
         sort: false
       },
       {
         field: 'age',
         headerName: 'Age',
-        filter: false,
+        filter: 'agNumberColumnFilter',
         sort: true
       },
     ]

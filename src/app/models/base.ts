@@ -1,7 +1,7 @@
 export interface DictionaryConfigItem {
   field: string,
   headerName: string,
-  filter: boolean,
+  filter: string | boolean,
   sort: boolean
 }
 

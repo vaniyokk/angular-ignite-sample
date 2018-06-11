@@ -16,6 +16,8 @@
   rowSelection="single"
   (rowSelected)="onRowSelected($event)"
   (gridReady)="onGridReady($event)"
+  [pagination]="true"
+  [paginationPageSize]="10"
 >
 </ag-grid-angular>
 
